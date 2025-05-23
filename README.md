@@ -1,49 +1,130 @@
-## How to Run the Models with Different Reward Shaping Approaches
+# 🧠 RewardShaping-GNN
 
-To run each model variant, follow the instructions below to replace the necessary files and update configurations as required:
-
----
-
-### 🎯 Reward Shaping Approaches without CSR:
-
-- **GAT-based Reward Shaping**  
-  Copy `utilssparsestaticgat.py` into `utils.py`.
-
-- **GraphSAGE-based Reward Shaping**  
-  Copy `utilsfinalsparseminsage.py` into `utils.py`.
-
-- **Node2Vec-based Reward Shaping**  
-  Copy `utilsfinalN2Vsparse.py` into `utils.py`.
-
-- For all of the above models, also copy `state_trackerorg.py` into `state_tracker.py`.
+This repository provides implementations of various reward shaping strategies using **Graph Neural Networks (GNNs)** in dialogue systems. Supported GNNs: **GAT**, **GraphSAGE**, **Node2Vec** — with and without **CSR (Compressed Sparse Row)**.
+Base models include: **DQN** and **D3QN**.
 
 ---
 
-### 🧩 Reward Shaping Approaches with CSR:
+## 🔧 Run on Google Colab (Notebook-Style Instructions)
 
-- **GAT + CSR-based Reward Shaping**  
-  Copy `utilssparsestaticpartialgat.py` into `utils.py`.
-
-- **GraphSAGE + CSR-based Reward Shaping**  
-  Copy `utilspartialsage.py` into `utils.py`.
-
-- **Node2Vec + CSR-based Reward Shaping**  
-  Copy `utilsN2Vsparsepartial.py` into `utils.py`.
-
-- For all of these models, also copy `state_trackerw2vfinal.py` into `state_tracker.py`.
+Follow the steps below just like in a Colab notebook:
 
 ---
 
-### 🤖 Base Model Execution
+### 🛠️ Step 1: Clone the Repository
 
-- **To run the D3QN model:**
-  - Copy `d3qn.py` into `dqn_agent.py`.
-  - In the `constants.json` file, change the value of `"vanilla": true,` to `false`.
-
-- **To run the DQN model:**
-  - Copy `dqn_agentdqn.py` into `dqn_agent.py`.
-  - Keep the value of `"vanilla": true,` set to `true` in the `constants.json` file.
+```python
+# Clone the repo and move into the directory
+!git clone https://github.com/shaghayeghsi/RewardShaping-GNN.git
+%cd RewardShaping-GNN.git
+```
 
 ---
 
-> ⚠️ Please ensure all file replacements and configuration changes are completed before executing any model.
+### 📦 Step 2: Unzip the Dataset
+
+```python
+# Unzip the dataset
+!unzip dataset_state_after.csv.zip
+```
+
+---
+
+### 🚀 Step 3: Train the Model
+
+```python
+# Train the model using default settings
+!python train.py
+```
+
+---
+
+## 🎯 Reward Shaping (without CSR)
+
+Choose **one** of the following and run:
+
+```python
+# GAT-based shaping
+!cp utilssparsestaticgat.py utils.py
+```
+
+```python
+# GraphSAGE-based shaping
+!cp utilsfinalsparseminsage.py utils.py
+```
+
+```python
+# Node2Vec-based shaping
+!cp utilsfinalN2Vsparse.py utils.py
+```
+
+Then:
+
+```python
+# Common tracker for non-CSR models
+!cp state_trackerorg.py state_tracker.py
+```
+
+---
+
+## 🧹 Reward Shaping (with CSR)
+
+Choose **one** of the following:
+
+```python
+# GAT + CSR
+!cp utilssparsestaticpartialgat.py utils.py
+```
+
+```python
+# GraphSAGE + CSR
+!cp utilspartialsage.py utils.py
+```
+
+```python
+# Node2Vec + CSR
+!cp utilsN2Vsparsepartial.py utils.py
+```
+
+Then:
+
+```python
+# Common tracker for CSR-based models
+!cp state_trackerw2vfinal.py state_tracker.py
+```
+
+---
+
+## 🤖 Run Base Models
+
+### D3QN:
+
+```python
+# Use D3QN agent
+!cp d3qn.py dqn_agent.py
+```
+
+Edit `constants.json`:
+
+```json
+"vanilla": false
+```
+
+---
+
+### DQN:
+
+```python
+# Use DQN agent
+!cp dqn_agentdqn.py dqn_agent.py
+```
+
+Keep `constants.json` as:
+
+```json
+"vanilla": true
+```
+
+---
+
+> ⚠️ **Make sure all file replacements are done correctly before training any model.**
