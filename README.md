@@ -29,8 +29,36 @@ Follow the steps below just like in a Colab notebook:
 ```
 
 ---
+### 🧰 Step 3: Install Dependencies
 
-### 🚀 Step 3: Train the Model
+```python
+# Download the pre-trained Word2Vec model (GoogleNews vectors)
+!gdown --id '1sG0osAy9VV26HzQBoBkRWS4vT9X60VaB' --output /content/drive/MyDrive/ArewardShap/ArewardShap/GO-Bot-DRL/GoogleNews-vectors-negative300.bin.gz
+
+# Remove any incompatible or broken PyG packages
+!pip uninstall -y torch-scatter torch-sparse torch-cluster torch-spline-conv
+
+# Install compatible versions of PyG packages for torch==2.6.0 + CPU
+!pip install torch-scatter -f https://data.pyg.org/whl/torch-2.6.0+cpu.html
+!pip install torch-sparse -f https://data.pyg.org/whl/torch-2.6.0+cpu.html
+!pip install torch-cluster -f https://data.pyg.org/whl/torch-2.6.0+cpu.html
+!pip install torch-spline-conv -f https://data.pyg.org/whl/torch-2.6.0+cpu.html
+!pip install torch-geometric -U
+
+# Install additional required libraries
+!pip install gdown
+!pip install gensim
+!pip install node2vec
+!pip install spektral
+!pip install networkx
+!pip install numpy
+!pip install pandas
+!pip install scikit-learn
+```
+
+---
+
+### 🚀 Step 4: Train the Model
 
 ```python
 # Train the model using default settings
